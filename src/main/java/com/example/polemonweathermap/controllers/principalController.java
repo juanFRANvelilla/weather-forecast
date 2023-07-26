@@ -1,8 +1,8 @@
 package com.example.polemonweathermap.controllers;
 
-import ch.qos.logback.core.model.Model;
 import com.example.polemonweathermap.services.ForecastImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.net.http.HttpHeaders;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Controller
 public class principalController {
@@ -28,7 +27,7 @@ public class principalController {
         return "index";
     }
 
-    /*
+
     @PostMapping("/forecast")
     public ResponseEntity<byte[]> handleForecast(@RequestParam("datePicker") String dateString) {
         File image = forecastImageService.getImage(dateString);
@@ -39,17 +38,14 @@ public class principalController {
             try {
                 byte[] imageBytes = Files.readAllBytes(Path.of(image.getPath()));
 
-                HttpHeaders headers = new HttpHeaders();
-                headers.setContentType(MediaType.IMAGE_JPEG);
-
-                return ResponseEntity.ok().headers(headers).body(imageBytes);
+                return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageBytes);
             } catch (IOException e) {
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
         }
     }
-    */
+
 
 
 }
